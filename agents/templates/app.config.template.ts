@@ -14,10 +14,6 @@ const config: ExpoConfig = {
     resizeMode: 'contain',
     backgroundColor: '#ffffff',
   },
-  ios: {
-    supportsTablet: false,
-    bundleIdentifier: 'com.boa.APP_SLUG',
-  },
   android: {
     adaptiveIcon: {
       foregroundImage: './assets/adaptive-icon.png',

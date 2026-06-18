@@ -35,6 +35,7 @@ Do not proceed to Step 4 until you have written out Steps 1–3 explicitly.
 - [ ] Verify `apps/<app-name>/` exists and contains `SPEC.md`
 - [ ] Copy `agents/templates/metro.config.template.js` → `apps/<app-name>/metro.config.js`
 - [ ] Copy `agents/templates/app.config.template.ts` → `apps/<app-name>/app.config.ts` and fill in the APP_* placeholders using `app_name` and a URL-safe slug from it
+- [ ] Copy `agents/templates/eas.json.template` → `apps/<app-name>/eas.json`
 
 ---
 
