@@ -1,0 +1,15 @@
+{
+  "name": "boa-hackathon",
+  "private": true,
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "scripts": {
+    "typecheck": "yarn workspaces run typecheck",
+    "build:packages": "yarn workspaces run build --if-present"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.0"
+  }
+}

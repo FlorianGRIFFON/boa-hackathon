@@ -1,0 +1,79 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "description": "Structured output from the builder agent. Returned after all screens are built and self-QA is complete.",
+  "properties": {
+    "status": {
+      "type": "string",
+      "enum": ["complete", "blocked"],
+      "description": "'complete' means all screens built and all success_criteria passed. 'blocked' means the agent stopped due to an ambiguity or missing information."
+    },
+    "app_dir": {
+      "type": "string",
+      "description": "Relative path to the app directory, e.g. apps/2026-W26-focus-timer"
+    },
+    "screens_built": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Screens actually built — must match SPEC.md mvp_screens exactly when status is complete"
+    },
+    "components_reused": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Components pulled from @boa/shared-ui that were used as-is"
+    },
+    "components_added_to_shared": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string" },
+          "path": { "type": "string" },
+          "reason": { "type": "string", "description": "Why this is generic enough to live in shared-ui" }
+        },
+        "required": ["name", "path", "reason"]
+      },
+      "description": "New components added to packages/shared-ui during this build"
+    },
+    "components_app_specific": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "New components created inside the app directory (too specific for shared-ui)"
+    },
+    "self_qa": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "criterion": { "type": "string", "description": "Verbatim from SPEC.md success_criteria" },
+          "passed": { "type": "boolean" },
+          "evidence": { "type": "string", "description": "What was observed that proves pass or identifies the gap" }
+        },
+        "required": ["criterion", "passed", "evidence"]
+      },
+      "description": "One entry per item in SPEC.md success_criteria"
+    },
+    "blockers": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "screen": { "type": "string" },
+          "question": { "type": "string", "description": "The specific ambiguity or missing information" },
+          "options": {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "The two or three reasonable interpretations the human must choose between"
+          }
+        },
+        "required": ["screen", "question", "options"]
+      },
+      "description": "Non-empty when status is 'blocked'. The human must resolve each blocker before the build can continue."
+    },
+    "notes": {
+      "type": "string",
+      "description": "Any context the builder wants to surface for the human reviewer — trade-offs made, assumptions documented, things to test manually"
+    }
+  },
+  "required": ["status", "app_dir", "screens_built", "components_reused", "components_added_to_shared", "components_app_specific", "self_qa", "blockers"]
+}

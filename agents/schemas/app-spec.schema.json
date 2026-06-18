@@ -1,0 +1,72 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "description": "Structured output schema for the brainstorm agent. Every field is required — the agent must not proceed without answering all of them.",
+  "properties": {
+    "app_name": {
+      "type": "string",
+      "description": "Short, memorable app name (2-3 words max)"
+    },
+    "problem_statement": {
+      "type": "string",
+      "description": "The specific problem this app solves, written as a user story: 'When I [situation], I struggle to [problem] because [root cause]'"
+    },
+    "target_user": {
+      "type": "string",
+      "description": "Concrete description of the primary user. Not a demographic — a person with a specific context and need."
+    },
+    "why_existing_solutions_fail": {
+      "type": "string",
+      "description": "What does the user try today, and why is it not good enough? Must name at least one real alternative."
+    },
+    "hero_feature": {
+      "type": "string",
+      "description": "The single feature that makes this app worth paying for. One sentence."
+    },
+    "out_of_scope": {
+      "type": "array",
+      "items": { "type": "string" },
+      "minItems": 3,
+      "description": "Features explicitly excluded from the MVP. These are guardrails for the builder agent."
+    },
+    "monetization": {
+      "type": "object",
+      "properties": {
+        "free_tier": { "type": "string", "description": "What the user gets for free" },
+        "paid_tier": { "type": "string", "description": "What the user gets when they pay" },
+        "price_usd": { "type": "number", "description": "Monthly price in USD" },
+        "trial_days": { "type": "integer", "description": "Free trial length in days (0 = no trial)" }
+      },
+      "required": ["free_tier", "paid_tier", "price_usd", "trial_days"]
+    },
+    "willingness_to_pay_signal": {
+      "type": "string",
+      "description": "Evidence or reasoning that the target user would pay this price. Must be specific, not generic ('people pay for apps')."
+    },
+    "mvp_screens": {
+      "type": "array",
+      "items": { "type": "string" },
+      "minItems": 2,
+      "maxItems": 5,
+      "description": "Exhaustive list of screens in the MVP. The builder agent will build exactly these — no more."
+    },
+    "success_criteria": {
+      "type": "array",
+      "items": { "type": "string" },
+      "minItems": 3,
+      "description": "Testable acceptance criteria. Each must be verifiable by the QA agent without human judgment."
+    }
+  },
+  "required": [
+    "app_name",
+    "problem_statement",
+    "target_user",
+    "why_existing_solutions_fail",
+    "hero_feature",
+    "out_of_scope",
+    "monetization",
+    "willingness_to_pay_signal",
+    "mvp_screens",
+    "success_criteria"
+  ]
+}
