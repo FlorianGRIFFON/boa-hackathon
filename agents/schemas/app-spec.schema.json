@@ -37,8 +37,8 @@
       "type": "array",
       "items": { "type": "string" },
       "minItems": 2,
-      "maxItems": 5,
-      "description": "Exhaustive list of screens in the MVP. The builder agent will build exactly these — no more."
+      "maxItems": 4,
+      "description": "Exhaustive list of screens in the MVP. The builder agent will build exactly these — no more. No paywall screen — all apps are free."
     },
     "success_criteria": {
       "type": "array",

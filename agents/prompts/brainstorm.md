@@ -138,9 +138,9 @@ Every field must be grounded in the research you completed above — not generic
 
 **`out_of_scope`** — Must include at least 3 items, and at least one of them must be a feature that a developer would assume was obviously necessary. If your out_of_scope list looks like obvious non-features ("AR mode", "blockchain integration"), it will not prevent scope creep.
 
-**`success_criteria`** — Every item must be testable by a QA agent or human tester with no subjective judgment required. Not "the UI feels intuitive." Testable examples: "The hero feature completes in under 3 taps from the home screen", "The paywall appears on the second use of the premium feature", "The onboarding flow has exactly 3 steps."
+**`success_criteria`** — Every item must be testable by a QA agent or human tester with no subjective judgment required. Not "the UI feels intuitive." Testable examples: "The hero feature completes in under 3 taps from the home screen", "The onboarding flow has exactly 3 steps", "The history screen shows entries for the past 7 days."
 
-**`mvp_screens`** — List the exact screen names the builder agent will build. Maximum 5. These become the builder's scope contract — every screen you list gets built, every screen you omit does not exist.
+**`mvp_screens`** — List the exact screen names the builder agent will build. Maximum 4. No paywall screen — this app is free. These become the builder's scope contract — every screen you list gets built, every screen you omit does not exist.
 
 ---
 
