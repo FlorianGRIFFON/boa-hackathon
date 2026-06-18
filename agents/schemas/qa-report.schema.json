@@ -1,0 +1,53 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "description": "Structured output from the QA agent.",
+  "properties": {
+    "app_dir": { "type": "string" },
+    "overall_verdict": {
+      "type": "string",
+      "enum": ["pass", "pass_with_flags", "fail", "blocked"],
+      "description": "'pass': all tests pass, no rule violations. 'pass_with_flags': tests pass but visual/copy issues found. 'fail': one or more Maestro tests failed. 'blocked': could not run tests (build not installed, Maestro not available, etc.)"
+    },
+    "maestro_results": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "test_file": { "type": "string" },
+          "result":    { "type": "string", "enum": ["pass", "fail", "skipped"] },
+          "failure":   { "type": "string", "description": "Exact failing assertion and context. Empty string if pass." }
+        },
+        "required": ["test_file", "result", "failure"]
+      }
+    },
+    "visual_qa": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "rule":     { "type": "string", "description": "The rule checked, e.g. 'No emoji in UI'" },
+          "result":   { "type": "string", "enum": ["pass", "fail"] },
+          "screen":   { "type": "string", "description": "Which screen or file the violation was found in" },
+          "evidence": { "type": "string" }
+        },
+        "required": ["rule", "result", "screen", "evidence"]
+      }
+    },
+    "known_gaps": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Gaps documented in BUILD_RESULT.md — not counted as failures"
+    },
+    "blockers": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Reasons the QA run could not complete"
+    },
+    "summary": {
+      "type": "string",
+      "description": "One paragraph for the human checkpoint"
+    }
+  },
+  "required": ["app_dir", "overall_verdict", "maestro_results", "visual_qa", "known_gaps", "blockers", "summary"]
+}

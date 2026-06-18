@@ -70,10 +70,15 @@
       },
       "description": "Non-empty when status is 'blocked'. The human must resolve each blocker before the build can continue."
     },
+    "test_flows": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Paths to Maestro test files written during this build, e.g. ['apps/2026-W26/tests/maestro/01-onboarding.yaml']"
+    },
     "notes": {
       "type": "string",
       "description": "Any context the builder wants to surface for the human reviewer — trade-offs made, assumptions documented, things to test manually"
     }
   },
-  "required": ["status", "app_dir", "screens_built", "components_reused", "components_added_to_shared", "components_app_specific", "self_qa", "blockers"]
+  "required": ["status", "app_dir", "screens_built", "components_reused", "components_added_to_shared", "components_app_specific", "self_qa", "blockers", "test_flows"]
 }

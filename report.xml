@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<testsuites>
+  <testsuite name="Test Suite" device="iPhone SE (3rd generation) - iOS 18.3 - 507E9C5E-6A0A-45AD-9388-ECC1635A301F" tests="6" failures="6" time="135.0">
+    <testcase id="05-onboarding-steps" name="05-onboarding-steps" classname="05-onboarding-steps" file="apps/2026-W27-clientclock/tests/maestro/05-onboarding-steps.yaml" time="24.0" status="ERROR">
+      <failure>Assertion is false: "01" is visible</failure>
+    </testcase>
+    <testcase id="04-gap-detection" name="04-gap-detection" classname="04-gap-detection" file="apps/2026-W27-clientclock/tests/maestro/04-gap-detection.yaml" time="23.0" status="ERROR">
+      <failure>Element not found: Text matching regex: Skip</failure>
+    </testcase>
+    <testcase id="03-paywall-gate" name="03-paywall-gate" classname="03-paywall-gate" file="apps/2026-W27-clientclock/tests/maestro/03-paywall-gate.yaml" time="21.0" status="ERROR">
+      <failure>App crashed or stopped while executing flow, please check diagnostic logs: ~/Library/Logs/DiagnosticReports directory</failure>
+    </testcase>
+    <testcase id="02-home-reachable" name="02-home-reachable" classname="02-home-reachable" file="apps/2026-W27-clientclock/tests/maestro/02-home-reachable.yaml" time="22.0" status="ERROR">
+      <failure>Element not found: Text matching regex: Skip</failure>
+    </testcase>
+    <testcase id="06-weekly-report-selectable" name="06-weekly-report-selectable" classname="06-weekly-report-selectable" file="apps/2026-W27-clientclock/tests/maestro/06-weekly-report-selectable.yaml" time="23.0" status="ERROR">
+      <failure>Element not found: Text matching regex: Skip</failure>
+    </testcase>
+    <testcase id="01-single-tap-switch" name="01-single-tap-switch" classname="01-single-tap-switch" file="apps/2026-W27-clientclock/tests/maestro/01-single-tap-switch.yaml" time="22.0" status="ERROR">
+      <failure>Element not found: Text matching regex: Skip</failure>
+    </testcase>
+  </testsuite>
+</testsuites>

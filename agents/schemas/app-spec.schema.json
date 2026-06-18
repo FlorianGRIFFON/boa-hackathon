@@ -21,27 +21,13 @@
     },
     "hero_feature": {
       "type": "string",
-      "description": "The single feature that makes this app worth paying for. One sentence."
+      "description": "The single feature that defines this app's value. One sentence."
     },
     "out_of_scope": {
       "type": "array",
       "items": { "type": "string" },
       "minItems": 3,
       "description": "Features explicitly excluded from the MVP. These are guardrails for the builder agent."
-    },
-    "monetization": {
-      "type": "object",
-      "properties": {
-        "free_tier": { "type": "string", "description": "What the user gets for free" },
-        "paid_tier": { "type": "string", "description": "What the user gets when they pay" },
-        "price_usd": { "type": "number", "description": "Monthly price in USD" },
-        "trial_days": { "type": "integer", "description": "Free trial length in days (0 = no trial)" }
-      },
-      "required": ["free_tier", "paid_tier", "price_usd", "trial_days"]
-    },
-    "willingness_to_pay_signal": {
-      "type": "string",
-      "description": "Evidence or reasoning that the target user would pay this price. Must be specific, not generic ('people pay for apps')."
     },
     "mvp_screens": {
       "type": "array",
@@ -64,8 +50,6 @@
     "why_existing_solutions_fail",
     "hero_feature",
     "out_of_scope",
-    "monetization",
-    "willingness_to_pay_signal",
     "mvp_screens",
     "success_criteria"
   ]

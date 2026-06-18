@@ -8,16 +8,6 @@ build/
 # EAS
 .eas/
 
-# iOS
-apps/*/ios/Pods/
-apps/*/ios/*.xcworkspace/xcuserdata/
-apps/*/ios/build/
-
-# Android
-apps/*/android/build/
-apps/*/android/.gradle/
-apps/*/android/app/build/
-
 # Env files — never commit
 .env
 .env.local

@@ -49,7 +49,6 @@ Use exactly this stack. Do not introduce new dependencies without a strong reaso
 | Styling | `StyleSheet.create` only — no inline style objects, no Tailwind, no styled-components |
 | Local state | `useState`, `useReducer` — no Redux, no Zustand, no external state library |
 | Async storage | `@react-native-async-storage/async-storage` via `expo install` |
-| Subscription | `useSubscription` from `@boa/shared-hooks` |
 | Onboarding | `useOnboarding` from `@boa/shared-hooks` |
 | Types | `@boa/shared-types` for shared interfaces |
 | TypeScript | Strict mode — no `any`, no `@ts-ignore`, no `as unknown as X` casts |
@@ -115,23 +114,8 @@ If `mvp_screens` includes an onboarding step, build it using `OnboardingStep` fr
 This is the most important screen. It directly implements `hero_feature` from SPEC.md. Give it the most attention. The screen must:
 - Be reachable in the fewest taps from app launch (max 2 after onboarding)
 - Function correctly without a network connection if the hero feature is local
-- Respect the free/paid split from `monetization` — show the paywall when the free tier limit is reached
 
-**4. Paywall screen**
-Use `PaywallScreen` from `@boa/shared-ui`. Wire it to `useSubscription` from `@boa/shared-hooks`. Populate it from SPEC.md:
-
-| PaywallScreen prop | Source |
-|-------------------|--------|
-| `appName` | `spec.app_name` |
-| `tagline` | `spec.problem_statement` condensed to ≤12 words |
-| `price` | `"$" + spec.monetization.price_usd` |
-| `billingPeriod` | `"month"` |
-| `trialDays` | `spec.monetization.trial_days` (omit prop if 0) |
-| `features` | Derive 3–4 bullet points from `spec.hero_feature` and `spec.monetization.paid_tier` |
-
-The paywall must be reachable via two paths: (a) hitting the free tier limit, and (b) a "Upgrade" button visible from the hero screen.
-
-**5. Remaining screens**
+**4. Remaining screens**
 Build any other screens listed in `mvp_screens` that haven't been covered above. Settings, history, profile — whatever the spec names.
 
 ---
@@ -218,9 +202,24 @@ If any criterion fails: fix it before reporting completion. Do not hand off a kn
 
 ---
 
+## Maestro Tests
+
+After self-QA passes, write a Maestro test flow for every item in `success_criteria`. Tests go in `<app-dir>/tests/maestro/`, numbered to match the criteria order: `01-<slug>.yaml`, `02-<slug>.yaml`, etc.
+
+Each test must:
+- Set `appId` to the bundle identifier from `app.config.ts`
+- Use `launchApp: { clearState: true }` so tests are independent
+- Target UI elements by their visible text (Maestro `tapOn: "text"`) — not by position
+- End with `takeScreenshot: "<test-slug>"` for evidence
+- Include a comment at the top naming the exact criterion being tested
+
+When a criterion cannot be fully automated yet (e.g. it requires a paid subscription state or a Phase 3 mock), write the test as far as it can go and add a `# TODO Phase 3:` comment explaining what's needed to complete it. Never omit the test file entirely — a partial test is better than no test.
+
+Add the list of test file paths to the `test_flows` field of `BuildResult`.
+
 ## Output
 
-When all screens are built and self-QA is complete:
+When all screens are built, self-QA is complete, and Maestro tests are written:
 
 **1. Return `BuildResult` JSON** matching `agents/schemas/build-result.schema.json`
 

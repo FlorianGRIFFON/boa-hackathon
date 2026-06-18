@@ -68,7 +68,6 @@ After the brainstorm agent returns, evaluate the spec before presenting it to th
 - `mvp_screens` has more than 5 entries
 - `out_of_scope` has fewer than 3 entries
 - `success_criteria` contains any item that cannot be tested without subjective judgment
-- `monetization.price_usd` is 0 (never free — this pipeline builds paid apps)
 - The one-week reality check would fail (backend required, custom native modules, more than 5 screens)
 
 **Soft flags** — surface to human with your concern, let them decide:
@@ -110,16 +109,12 @@ When presenting a checkpoint to the human, use this structure:
 **Idea in one sentence:** [problem_statement condensed]
 **Target user:** [target_user]
 **Hero feature:** [hero_feature]
-**Price:** $[price_usd]/month with [trial_days]-day trial
 
 **Screens to build (${count}):**
 [mvp_screens as numbered list]
 
 **Explicitly out of scope:**
 [out_of_scope as bullet list]
-
-**Why users will pay:**
-[willingness_to_pay_signal]
 
 **Flags from completeness check:**
 [list of issues found, or "None — spec looks clean"]
