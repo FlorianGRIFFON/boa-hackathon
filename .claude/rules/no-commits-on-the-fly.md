@@ -1,27 +1,29 @@
 ---
-description: When using subagents or parallel agents, do not commit changes on the fly. Stage all changes and create one consolidated commit at the end.
+description: Never commit changes unless the user explicitly asks. Stage all changes; wait for a commit instruction.
 alwaysApply: true
 ---
 
-# No Commits on the Fly
+# No Commits Without Explicit Request
 
-When dispatching subagents or parallel agents for implementation work:
+**Never run `git commit` unless the user explicitly asks for a commit.**
 
-- **Do NOT** instruct subagents to commit their changes
-- **Do NOT** commit after each task or subagent completes
-- **Stage** all changes as they are made
-- **Create one consolidated commit** at the end when all work is complete and verified
+This applies always — not just during subagent work.
+
+- **Stage** changes as work progresses (`git add`)
+- **Do NOT commit** at the end of a task, even if the work feels complete
+- **Wait** for the user to say "commit" or equivalent before committing
+
+## When dispatching subagents
+
+- Do NOT instruct subagents to commit their changes
+- Subagent prompts must say: "Do not commit. Report back when done."
+
+## Commit format (when the user does ask)
+
+- Use git conventional commits: `feat:`, `fix:`, `chore:`, `refactor:`, etc.
+- One concise sentence after the type
+- No `Co-Authored-By:` trailer — ever
 
 ## Why
 
-- Keeps git history clean with logical, reviewable commits
-- Easier to review the full scope of changes together before they land
-
-## Instructions for Subagent Prompts
-
-When writing prompts for implementer subagents, replace instructions like:
-- "Commit with message X"
-- "Commit your work"
-
-With:
-- "Do not commit. Report back when done. Changes will be committed together when all tasks are complete."
+The user wants full control over what lands in git history and when. Autonomous commits are surprising and hard to undo cleanly.
