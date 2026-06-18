@@ -1,0 +1,13 @@
+# Criterion: The Home screen is reachable and the running timer visible within 2 taps
+# from any screen in the app.
+appId: com.boa.clientclock
+---
+- launchApp:
+    clearState: true
+- tapOn: "Skip"
+# Navigate away to Clients tab
+- tapOn: "Clients"
+# Tap 1: Home tab — reaches Home screen in 1 tap
+- tapOn: "Home"
+- assertVisible: "ClientClock"
+- takeScreenshot: "02-home-from-clients"

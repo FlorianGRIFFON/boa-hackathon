@@ -1,0 +1,28 @@
+# Criterion: The Paywall screen appears when a free-tier user attempts to add a third
+# client or navigates to Day View or Weekly Report, and does not appear at any other time.
+appId: com.boa.clientclock
+---
+- launchApp:
+    clearState: true
+- tapOn: "Skip"
+# Add two clients (free tier limit)
+- tapOn: "Clients"
+- tapOn: "Add"
+- inputText: "Client One"
+- tapOn: "Save"
+- tapOn: "Add"
+- inputText: "Client Two"
+- tapOn: "Save"
+# Attempt to add third client — paywall must appear
+- tapOn: "Add"
+- assertVisible: "ClientClock"
+- assertVisible: "Try free for 14 days"
+- tapOn: "Close"
+# Navigate to Day View — paywall must appear
+- tapOn: "Today"
+- assertVisible: "Unlock Pro"
+- tapOn: "Home"
+# Navigate to Weekly Report — paywall must appear
+- tapOn: "Week"
+- assertVisible: "Unlock Pro"
+- takeScreenshot: "03-paywall-gate"
