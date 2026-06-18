@@ -51,6 +51,7 @@ Use exactly this stack. Do not introduce new dependencies without a strong reaso
 | Local state | `useState`, `useReducer` — no Redux, no Zustand, no external state library |
 | Async storage | `@react-native-async-storage/async-storage` via `expo install` |
 | Onboarding | `useOnboarding` from `@boa/shared-hooks` |
+| Icons | `Icon` and `Checkbox` from `@boa/shared-ui` — Feather only, never emoji |
 | Types | `@boa/shared-types` for shared interfaces |
 | TypeScript | Strict mode — no `any`, no `@ts-ignore`, no `as unknown as X` casts |
 

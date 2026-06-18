@@ -19,6 +19,10 @@ Add a component to `packages/shared-ui` when:
 - It is generic enough to appear in more than one app (paywall screen, onboarding step, subscription button, loading skeleton, etc.)
 - It has no app-specific business logic embedded in it
 
+## Icons
+
+Use `Icon` and `Checkbox` from `@boa/shared-ui` for all UI icons. Never use emoji as icons — they render as broken placeholders on iOS. Do not import `@expo/vector-icons` directly in app code; go through the shared `Icon` component.
+
 Do **not** add to `packages/shared-ui` when:
 - The component is tightly coupled to this app's specific feature
 - It would require passing many app-specific props to be reusable

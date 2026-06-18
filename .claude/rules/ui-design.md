@@ -35,7 +35,7 @@ These rules apply to every screen in every app. The goal is UI that looks like a
 - Onboarding steps
 - Empty states
 
-Use text labels, or a single consistent icon set (e.g. `@expo/vector-icons/Feather`) — not both, not mixed.
+Use `Icon` and `Checkbox` from `@boa/shared-ui` — not emoji, not raw `@expo/vector-icons` imports in app code. Both wrap Feather internally.
 
 The only acceptable emoji use is in user-generated content that the user themselves typed.
 
