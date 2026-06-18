@@ -24,7 +24,7 @@ const APP_SPEC_SCHEMA = {
     why_existing_solutions_fail: { type: 'string' },
     hero_feature:                { type: 'string' },
     out_of_scope:                { type: 'array', items: { type: 'string' }, minItems: 3 },
-    mvp_screens:                 { type: 'array', items: { type: 'string' }, minItems: 2, maxItems: 5 },
+    mvp_screens:                 { type: 'array', items: { type: 'string' }, minItems: 2, maxItems: 4 },
     success_criteria:            { type: 'array', items: { type: 'string' }, minItems: 3 },
   },
   required: [
@@ -81,6 +81,12 @@ Your context for this run:
 - Week: ${week}
 - Category hint: ${category ?? 'any — pick the strongest problem you find in your research'}
 ${feedbackBlock}
+IMPORTANT CONSTRAINTS:
+- This app is completely FREE. No paywall, no subscription, no free tier limits, no upgrade prompts.
+- Do NOT include a Paywall screen in mvp_screens.
+- Do NOT include any success criterion about a paywall, upgrade, or purchase gate.
+- Maximum 4 screens total (no paywall screen to fill the 5th slot).
+
 Steps to complete:
 1. Follow the full 7-step process in agents/prompts/brainstorm.md
 2. When writing the spec, produce a dir_slug: 1-3 kebab-case words describing what the app
@@ -89,12 +95,16 @@ Steps to complete:
 3. Derive the app directory: apps/${week}-<dir_slug>
 4. Create that directory if it does not exist
 5. Write SPEC.md to apps/${week}-<dir_slug>/SPEC.md using the exact format in the prompt
-6. Return the structured spec JSON including dir_slug
+6. Return the structured spec JSON — you MUST include dir_slug in the JSON output
 
 Do not skip research steps to save time. The quality of the spec directly determines whether the app is worth building.`,
     { schema: APP_SPEC_SCHEMA, label: `brainstorm-attempt-${attempt}` }
   )
 
+  // Fallback: if agent omitted dir_slug, derive it from app_name
+  if (!spec.dir_slug) {
+    spec.dir_slug = spec.app_name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')
+  }
   appDir = `apps/${week}-${spec.dir_slug}`
   log(`Spec generated: "${spec.app_name}" (${appDir}) — ${spec.mvp_screens.length} screens`)
 
@@ -176,7 +186,7 @@ ${flags}
 Spec written to: ${appDir}/SPEC.md
 
 ${check.hard_failures.length === 0
-  ? `To proceed: run weekly-build.js with args { appDir: "${appDir}" }`
+  ? `Build will start automatically.`
   : `Max retries reached. Review failures above and re-run with specific direction.`
 }`
 }
