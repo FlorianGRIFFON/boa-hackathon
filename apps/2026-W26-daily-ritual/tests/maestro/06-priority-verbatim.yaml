@@ -1,0 +1,43 @@
+# Criterion: All 3 priority labels entered during Morning Ritual are displayed
+# verbatim on the Evening Review screen.
+# Note: evening review requires paid tier. This test verifies the morning → storage
+# → evening data pipeline using a workaround: navigate directly to /evening-review
+# via deep link after completing morning. Full gate bypass requires Phase 3 test mode.
+# Until then, this test verifies that morning data is stored and readable post-save.
+appId: com.boa.dayritual
+---
+- launchApp:
+    clearState: true
+
+# Skip onboarding
+- tapOn: "Skip"
+
+# Enter 3 distinct priority strings
+- tapOn: "Start"
+- tapOn:
+    text: "What's your priority?"
+    index: 0
+- inputText: "VERBATIM_CHECK_ALPHA"
+- tapOn:
+    text: "What's your priority?"
+    index: 0
+- inputText: "VERBATIM_CHECK_BETA"
+- tapOn:
+    text: "What's your priority?"
+    index: 0
+- inputText: "VERBATIM_CHECK_GAMMA"
+- tapOn: "Confirm priorities"
+- assertVisible: "Completed"
+
+- takeScreenshot: "priorities-saved-on-home"
+
+# Deep-link directly into evening review (bypasses paywall gate for test purposes)
+# Replace with proper paywall bypass in Phase 3
+- openLink: "dayritual://evening-review"
+
+# Verify all 3 labels appear verbatim
+- assertVisible: "VERBATIM_CHECK_ALPHA"
+- assertVisible: "VERBATIM_CHECK_BETA"
+- assertVisible: "VERBATIM_CHECK_GAMMA"
+
+- takeScreenshot: "priorities-verbatim-on-evening-review"

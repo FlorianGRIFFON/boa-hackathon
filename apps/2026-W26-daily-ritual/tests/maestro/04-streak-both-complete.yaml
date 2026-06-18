@@ -1,0 +1,42 @@
+# Criterion: The streak counter increments by 1 only after both morning AND evening
+# rituals are marked complete for the same calendar day.
+# Note: evening review is behind the paywall in production. This test requires a
+# dev build with SKIP_PAYWALL=true or a seeded subscription state.
+# For now this test verifies the streak is 0 before and documents the expected post-state.
+# Full automation requires Phase 3 Stripe mock or a test-mode flag.
+appId: com.boa.dayritual
+---
+- launchApp:
+    clearState: true
+
+# Skip onboarding
+- tapOn: "Skip"
+
+# Streak starts at 0
+- assertVisible: "0"
+- assertVisible: "day streak"
+
+# Complete morning ritual
+- tapOn: "Start"
+- tapOn:
+    text: "What's your priority?"
+    index: 0
+- inputText: "Task alpha"
+- tapOn:
+    text: "What's your priority?"
+    index: 0
+- inputText: "Task beta"
+- tapOn:
+    text: "What's your priority?"
+    index: 0
+- inputText: "Task gamma"
+- tapOn: "Confirm priorities"
+- assertVisible: "Completed"
+
+# After morning only — streak must still be 0
+- assertVisible: "0"
+- assertVisible: "day streak"
+
+- takeScreenshot: "streak-after-morning-only-still-zero"
+
+# TODO Phase 3: add subscription mock, complete evening review, assert streak = 1

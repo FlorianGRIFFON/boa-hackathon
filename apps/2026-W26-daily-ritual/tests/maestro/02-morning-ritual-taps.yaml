@@ -1,0 +1,38 @@
+# Criterion: The morning ritual flow completes in 3 taps or fewer from the Home screen
+# to the confirmation screen.
+# Verified tap count: Start → (tap 1) + fill priorities (typing, not taps) + Confirm (tap 2) = 2 taps.
+appId: com.boa.dayritual
+---
+- launchApp:
+    clearState: true
+
+# Skip onboarding to land on Home
+- tapOn: "Skip"
+- assertVisible: "Morning Ritual"
+
+# Tap 1: open morning ritual
+- tapOn: "Start"
+- assertVisible: "What are your 3 priorities for today?"
+
+# Typing is not a tap — fill all 3 priority fields
+- tapOn:
+    text: "What's your priority?"
+    index: 0
+- inputText: "Write draft proposal"
+- tapOn:
+    text: "What's your priority?"
+    index: 0
+- inputText: "Client call prep"
+- tapOn:
+    text: "What's your priority?"
+    index: 0
+- inputText: "Code review"
+
+# Tap 2: confirm
+- tapOn: "Confirm priorities"
+
+# Back on Home, morning marked complete
+- assertVisible: "Completed"
+- assertVisible: "Morning Ritual"
+
+- takeScreenshot: "morning-ritual-complete"

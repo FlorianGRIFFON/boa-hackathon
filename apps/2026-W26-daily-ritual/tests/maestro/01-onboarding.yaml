@@ -1,0 +1,28 @@
+# Criterion: The onboarding flow has exactly 3 steps and ends on the Home screen.
+# Test method: count screen transitions from fresh install to Home.
+appId: com.boa.dayritual
+---
+- launchApp:
+    clearState: true
+
+# Step 1
+- assertVisible: "Build your daily ritual"
+- assertNotVisible: "Morning Ritual"
+- tapOn: "Next"
+
+# Step 2
+- assertVisible: "Close the day intentionally"
+- assertNotVisible: "Build your daily ritual"
+- tapOn: "Next"
+
+# Step 3 — last step, CTA changes to trial label
+- assertVisible: "Build the habit with streaks"
+- assertNotVisible: "Close the day intentionally"
+- tapOn: "Start 7-day free trial"
+
+# Landed on Home
+- assertVisible: "Morning Ritual"
+- assertVisible: "day streak"
+- assertNotVisible: "Build the habit with streaks"
+
+- takeScreenshot: "onboarding-complete-home"

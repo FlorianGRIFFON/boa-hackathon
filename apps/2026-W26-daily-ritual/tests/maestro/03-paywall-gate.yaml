@@ -1,0 +1,36 @@
+# Criterion: The evening review paywall appears the first time a free-tier user
+# taps "Start Evening Review". Free tier = useSubscription initial state (no purchase).
+appId: com.boa.dayritual
+---
+- launchApp:
+    clearState: true
+
+# Skip onboarding
+- tapOn: "Skip"
+- assertVisible: "Morning Ritual"
+
+# Complete morning ritual so evening card becomes tappable
+- tapOn: "Start"
+- tapOn:
+    text: "What's your priority?"
+    index: 0
+- inputText: "Priority one"
+- tapOn:
+    text: "What's your priority?"
+    index: 0
+- inputText: "Priority two"
+- tapOn:
+    text: "What's your priority?"
+    index: 0
+- inputText: "Priority three"
+- tapOn: "Confirm priorities"
+- assertVisible: "Completed"
+
+# Tap evening review card as free-tier user
+- tapOn: "Start"
+
+# Paywall must appear — not the evening review screen
+- assertVisible: "Try free for 7 days"
+- assertNotVisible: "How did your priorities go today?"
+
+- takeScreenshot: "paywall-gate-evening-review"

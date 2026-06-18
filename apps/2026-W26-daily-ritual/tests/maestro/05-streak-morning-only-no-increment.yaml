@@ -1,0 +1,38 @@
+# Criterion: Completing only the morning ritual does NOT increment the streak.
+# Test method: complete morning, force-quit, relaunch, confirm streak is still 0.
+appId: com.boa.dayritual
+---
+- launchApp:
+    clearState: true
+
+# Skip onboarding
+- tapOn: "Skip"
+- assertVisible: "0"
+
+# Complete morning ritual only
+- tapOn: "Start"
+- tapOn:
+    text: "What's your priority?"
+    index: 0
+- inputText: "Solo morning task A"
+- tapOn:
+    text: "What's your priority?"
+    index: 0
+- inputText: "Solo morning task B"
+- tapOn:
+    text: "What's your priority?"
+    index: 0
+- inputText: "Solo morning task C"
+- tapOn: "Confirm priorities"
+- assertVisible: "Completed"
+
+# Force-quit and relaunch — simulates the app restart persistence check
+- stopApp
+- launchApp
+
+# Streak must still be 0 — evening was never completed
+- assertVisible: "0"
+- assertVisible: "day streak"
+- assertNotVisible: "1"
+
+- takeScreenshot: "streak-after-relaunch-still-zero"
