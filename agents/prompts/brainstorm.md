@@ -124,9 +124,13 @@ Is there a free, obvious alternative that a pragmatic user would reach for inste
 
 ### Step 7 — Write the Spec
 
-Only after completing Steps 1–7 do you write the spec.
+Only after completing Steps 1–6 do you write the spec.
 
 Every field must be grounded in the research you completed above — not generic filler. Fields to pay special attention to:
+
+**`app_name`** — 2-3 words, brand-style. Not a description, not AI-sounding. Think: what would you call this if you were naming a small indie app? Examples: DayRitual, ClientClock, SleepLog.
+
+**`dir_slug`** — 1-3 kebab-case words describing what the app does, not the brand name. This is what someone types in the App Store search bar. Examples: `daily-ritual`, `client-time-tracker`, `sleep-log`, `water-reminder`. No brand names. No clever wordplay. Just the function.
 
 **`problem_statement`** — Write it as a user story: "When I [triggering situation], I struggle to [specific problem] because [root cause]." Not a product description.
 

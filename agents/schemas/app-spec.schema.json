@@ -7,6 +7,10 @@
       "type": "string",
       "description": "Short, memorable app name (2-3 words max)"
     },
+    "dir_slug": {
+      "type": "string",
+      "description": "Kebab-case directory slug derived from what the app does — not the brand name. 1-3 words. Examples: daily-ritual, sleep-tracker, water-log, habit-streak. No brand names, no clever wordplay."
+    },
     "problem_statement": {
       "type": "string",
       "description": "The specific problem this app solves, written as a user story: 'When I [situation], I struggle to [problem] because [root cause]'"
@@ -45,6 +49,7 @@
   },
   "required": [
     "app_name",
+    "dir_slug",
     "problem_statement",
     "target_user",
     "why_existing_solutions_fail",
