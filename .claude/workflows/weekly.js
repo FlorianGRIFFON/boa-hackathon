@@ -1,9 +1,10 @@
 export const meta = {
   name: 'weekly',
-  description: 'Full weekly pipeline: brainstorm → build. Stops after build for manual QA.',
+  description: 'Full weekly pipeline: brainstorm → build → assets. Stops after assets for manual QA.',
   phases: [
     { title: 'Brainstorm', detail: 'Research, validate, write SPEC.md' },
     { title: 'Build', detail: 'Scaffold, build screens, self-QA, manager review' },
+    { title: 'Assets', detail: 'Generate app icon and Play Store listing copy' },
   ],
 }
 
@@ -46,11 +47,21 @@ const buildResult = await workflow('weekly-build', { appDir })
 
 log(`Build complete: ${buildResult.buildResult?.status ?? 'unknown'}`)
 
+// ─── Phase 3: Assets ──────────────────────────────────────────────────────────
+
+phase('Assets')
+log(`Generating icon and store listing for ${appDir}`)
+
+const assetsResult = await workflow('weekly-assets', { appDir })
+
+log(`Assets complete`)
+
 return {
   status: buildResult.buildResult?.status ?? 'unknown',
   week,
   appDir,
   spec: brainstormResult.spec,
   buildResult,
+  assetsResult,
   message: buildResult.checkpoint_message,
 }
